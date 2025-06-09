@@ -68,9 +68,7 @@ Trough additional "metadata" comments it can add abstractions such as "groups" a
     - (OR) from source using pip
 
         ```console
-        git clone https://github.com/karlot/sshclick
-        cd sshclick
-        pip install .
+        pip install git+https://github.com/karlot/sshclick.git
         ```
 
 3. Use it as you like, `sshc` command should be available to access SSHClick application, see below chapter for basic [usage](https://github.com/karlot/sshclick#example-usage-and-features)

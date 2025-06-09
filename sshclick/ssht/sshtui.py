@@ -27,8 +27,20 @@ DEFAULT_CONNECT_OPTS = {
     "ConnectTimeout": SSH_CONNECT_TIMEOUT,  # Add explicit timeout option
 }
 
+# Patch built-in open function to default to UTF-8 encoding
+def patch_builtins_open():
+    import builtins
+    original_open = builtins.open
+    def utf8_open(*args, **kwargs):
+        if 'encoding' not in kwargs:
+            kwargs['encoding'] = 'utf-8'
+        return original_open(*args, **kwargs)
+    builtins.open = utf8_open
+
 
 class SSHTui(App):
+    patch_builtins_open()
+
     TITLE = "SSHClick"
     SUB_TITLE = "TUI"
 

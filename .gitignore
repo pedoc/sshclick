@@ -16,3 +16,5 @@ __pycache__
 # Builds
 build
 dist
+/.idea/
+/.venv/

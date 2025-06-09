@@ -8,6 +8,17 @@ from sshclick.globals import USER_SSH_CONFIG
 # Setup click to use both short and long help option
 CONTEXT_SETTINGS  = dict(help_option_names=['-h', '--help'])
 
+# Patch built-in open function to default to UTF-8 encoding
+def patch_builtins_open():
+    import builtins
+    original_open = builtins.open
+    def utf8_open(*args, **kwargs):
+        if 'encoding' not in kwargs:
+            kwargs['encoding'] = 'utf-8'
+        return original_open(*args, **kwargs)
+    builtins.open = utf8_open
+patch_builtins_open()
+
 #------------------------------------------------------------------------------
 # COMMAND: sshc
 #------------------------------------------------------------------------------
